@@ -1,5 +1,5 @@
 -- Updated on Aug 06, 2026
--- AFK Admin Panel - V6 Final (Blue & White Design + Real Spam + Logs Protection)
+-- AFK Admin Panel - V6 Final (Blue & White Design + Blue(2) Spam Logic + Logs Protection)
 local ScreenGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local ToggleCircle = Instance.new("TextButton")
@@ -18,6 +18,7 @@ local Color_TextLight = Color3.fromRGB(255, 255, 255)
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local success = pcall(function() ScreenGui.Parent = game:GetService("CoreGui") end)
 if not success then ScreenGui.Parent = PlayerGui end
@@ -373,6 +374,9 @@ local function refreshList()
         row.BackgroundColor3 = Color_SecondaryBG
         row.Size = UDim2.new(1, 0, 0, 25)
         Instance.new("UICorner", row)
+        local stroke = Instance.new("UIStroke", row)
+        stroke.Color = Color_Accent
+        stroke.Thickness = 0.5
         
         local label = Instance.new("TextLabel")
         label.Parent = row
@@ -423,27 +427,49 @@ local function applyGhamidPreset(num)
     showPage(PageHome)
 end
 
--- وظيفة إرسال الرسائل للشات (السبام الحقيقي)
-local function sendChatMessage(msg)
-    -- محاولة نظام الشات القديم
+-- نظام السبام المأخوذ من سكربت Blue(2)
+local chatRemote, hdRemote
+pcall(function() chatRemote = ReplicatedStorage:FindFirstChild("RemoteEvents"):FindFirstChild("ChatEvent") end)
+pcall(function()
+    local sig = ReplicatedStorage:FindFirstChild("HDAdminHDClient"):FindFirstChild("Signals")
+    if sig then hdRemote = sig:FindFirstChild("RequestCommandModification") end
+end)
+
+local function sendOnce(message)
+    -- محاولة إرسال عبر DataService (كما في سكربت Blue)
+    pcall(function() 
+        local rs = game:GetService("ReplicatedStorage")
+        if rs:FindFirstChild("RemoteEvents") and rs.RemoteEvents:FindFirstChild("DataService") then
+            rs.RemoteEvents.DataService:FireServer(message) 
+        end
+    end)
+    
+    -- محاولة إرسال عبر HDAdmin
+    if hdRemote then 
+        pcall(function() hdRemote:InvokeServer(message) end) 
+    end
+    
+    -- محاولة إرسال عبر شات Roblox الافتراضي (لضمان العمل في كل الحالات)
     local chatEvents = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
     if chatEvents and chatEvents:FindFirstChild("SayMessageRequest") then
-        chatEvents.SayMessageRequest:FireServer(msg, "All")
+        chatEvents.SayMessageRequest:FireServer(message, "All")
     end
-    -- محاولة نظام الشات الجديد (TextChatService)
     local textChatService = game:GetService("TextChatService")
     if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
         local channel = textChatService:FindFirstChild("TextChannels") and textChatService.TextChannels:FindFirstChild("RBXGeneral")
         if channel then
-            channel:SendAsync(msg)
+            channel:SendAsync(message)
         end
     end
 end
 
 local spamRunning = false
+local spamThread = nil
+
 SpamButton.MouseButton1Click:Connect(function()
     if spamRunning then
         spamRunning = false
+        spamThread = nil
         SpamButton.Text = "تشغيل سبام"
         return
     end
@@ -454,11 +480,12 @@ SpamButton.MouseButton1Click:Connect(function()
     spamRunning = true
     SpamButton.Text = "🛑 إيقاف سبام"
     
-    task.spawn(function()
-        while spamRunning and task.wait(0.5) do
+    spamThread = task.spawn(function()
+        while spamRunning do
             if ResultBox.Text ~= "—" and ResultBox.Text ~= "" then
-                sendChatMessage(ResultBox.Text)
+                sendOnce(ResultBox.Text)
             end
+            task.wait(0.05) -- سرعة السبام كما في سكربت Blue
         end
     end)
 end)
