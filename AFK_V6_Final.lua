@@ -1,5 +1,5 @@
 -- Updated on Aug 06, 2026
--- FAAS Admin Panel - V6 Fixed (Black & White Design + Real Spam + Logs Protection)
+-- AFK Admin Panel - V6 Final (Blue & White Design + Real Spam + Logs Protection)
 local ScreenGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local ToggleCircle = Instance.new("TextButton")
@@ -8,12 +8,12 @@ local PageSettings = Instance.new("Frame")
 local PagePresets = Instance.new("Frame")
 local PageGhamid = Instance.new("Frame")
 
--- Colors
-local Color_BG = Color3.fromRGB(15, 15, 15)
-local Color_Secondary = Color3.fromRGB(30, 30, 30)
-local Color_Accent = Color3.fromRGB(255, 255, 255)
-local Color_Text = Color3.fromRGB(255, 255, 255)
-local Color_TextDark = Color3.fromRGB(0, 0, 0)
+-- الألوان الأصلية (Blue & White)
+local Color_MainBG = Color3.fromRGB(225, 245, 255)
+local Color_SecondaryBG = Color3.fromRGB(255, 255, 255)
+local Color_Accent = Color3.fromRGB(100, 180, 255)
+local Color_TextDark = Color3.fromRGB(0, 80, 150)
+local Color_TextLight = Color3.fromRGB(255, 255, 255)
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -22,40 +22,40 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 local success = pcall(function() ScreenGui.Parent = game:GetService("CoreGui") end)
 if not success then ScreenGui.Parent = PlayerGui end
 
-ScreenGui.Name = "FAAS_V6_Fixed"
+ScreenGui.Name = "AFK_V6_Final"
 ScreenGui.ResetOnSpawn = false
 
 ToggleCircle.Name = "ToggleCircle"
 ToggleCircle.Parent = ScreenGui
-ToggleCircle.BackgroundColor3 = Color_BG
+ToggleCircle.BackgroundColor3 = Color_Accent
 ToggleCircle.Position = UDim2.new(0, 30, 0.5, -30)
 ToggleCircle.Size = UDim2.new(0, 55, 0, 55)
 ToggleCircle.Font = Enum.Font.GothamBold
-ToggleCircle.Text = "FAAS"
-ToggleCircle.TextColor3 = Color_Text
+ToggleCircle.Text = "AFK"
+ToggleCircle.TextColor3 = Color_TextLight
 ToggleCircle.TextSize = 13
 ToggleCircle.Visible = false
 ToggleCircle.Active = true
 ToggleCircle.Draggable = true
 Instance.new("UICorner", ToggleCircle).CornerRadius = UDim.new(1, 0)
 local CStroke = Instance.new("UIStroke", ToggleCircle)
-CStroke.Color = Color_Accent
+CStroke.Color = Color_SecondaryBG
 CStroke.Thickness = 1.5
 CStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color_BG
-MainFrame.Position = UDim2.new(0.5, -130, 0.5, -140)
-MainFrame.Size = UDim2.new(0, 260, 0, 280) -- Increased height for more buttons
+MainFrame.BackgroundColor3 = Color_MainBG
+MainFrame.Position = UDim2.new(0.5, -130, 0.5, -110)
+MainFrame.Size = UDim2.new(0, 260, 0, 240)
 MainFrame.Active = true
 MainFrame.Draggable = true
 Instance.new("UICorner", MainFrame)
 local MStroke = Instance.new("UIStroke", MainFrame)
 MStroke.Color = Color_Accent
-MStroke.Thickness = 1
+MStroke.Thickness = 2
 
--- ===== Home Page =====
+-- ===== الصفحة الرئيسية =====
 PageHome.Name = "PageHome"
 PageHome.Parent = MainFrame
 PageHome.BackgroundTransparency = 1
@@ -67,8 +67,8 @@ HomeTitle.BackgroundTransparency = 1
 HomeTitle.Position = UDim2.new(0, 10, 0, 5)
 HomeTitle.Size = UDim2.new(0.6, 0, 0, 20)
 HomeTitle.Font = Enum.Font.GothamBold
-HomeTitle.Text = "FAAS"
-HomeTitle.TextColor3 = Color_Text
+HomeTitle.Text = "AFK"
+HomeTitle.TextColor3 = Color_TextDark
 HomeTitle.TextSize = 14
 HomeTitle.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -79,7 +79,7 @@ CloseBtn.Position = UDim2.new(1, -25, 0, 5)
 CloseBtn.Size = UDim2.new(0, 20, 0, 20)
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.Text = "X"
-CloseBtn.TextColor3 = Color_Text
+CloseBtn.TextColor3 = Color_TextDark
 CloseBtn.TextSize = 14
 
 local SettingsBtn = Instance.new("TextButton")
@@ -89,65 +89,71 @@ SettingsBtn.Position = UDim2.new(1, -50, 0, 5)
 SettingsBtn.Size = UDim2.new(0, 20, 0, 20)
 SettingsBtn.Font = Enum.Font.SourceSans
 SettingsBtn.Text = "⚙️"
-SettingsBtn.TextColor3 = Color_Text
+SettingsBtn.TextColor3 = Color_TextDark
 SettingsBtn.TextSize = 16
 
 local UsernameInput = Instance.new("TextBox")
 UsernameInput.Parent = PageHome
-UsernameInput.BackgroundColor3 = Color_Secondary
-UsernameInput.Position = UDim2.new(0.05, 0, 0.1, 0)
+UsernameInput.BackgroundColor3 = Color_SecondaryBG
+UsernameInput.Position = UDim2.new(0.05, 0, 0.12, 0)
 UsernameInput.Size = UDim2.new(0.9, 0, 0, 25)
 UsernameInput.Font = Enum.Font.Gotham
 UsernameInput.PlaceholderText = "Username..."
-UsernameInput.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
+UsernameInput.PlaceholderColor3 = Color3.fromRGB(150, 180, 200)
 UsernameInput.Text = ""
-UsernameInput.TextColor3 = Color_Text
+UsernameInput.TextColor3 = Color_TextDark
 UsernameInput.TextSize = 13
 Instance.new("UICorner", UsernameInput)
+local UIStrokeInput = Instance.new("UIStroke", UsernameInput)
+UIStrokeInput.Color = Color_Accent
+UIStrokeInput.Thickness = 1
 
 local ResultBox = Instance.new("TextBox")
 ResultBox.Parent = PageHome
-ResultBox.BackgroundColor3 = Color_Secondary
-ResultBox.Position = UDim2.new(0.05, 0, 0.22, 0)
+ResultBox.BackgroundColor3 = Color3.fromRGB(240, 250, 255)
+ResultBox.Position = UDim2.new(0.05, 0, 0.28, 0)
 ResultBox.Size = UDim2.new(0.9, 0, 0, 45)
 ResultBox.Font = Enum.Font.Code
 ResultBox.Text = "—"
-ResultBox.TextColor3 = Color_Text
+ResultBox.TextColor3 = Color_TextDark
 ResultBox.TextSize = 9
 ResultBox.TextWrapped = true
 ResultBox.TextEditable = false
 Instance.new("UICorner", ResultBox)
+local UIStrokeResult = Instance.new("UIStroke", ResultBox)
+UIStrokeResult.Color = Color_Accent
+UIStrokeResult.Thickness = 0.5
 
 local CopyButton = Instance.new("TextButton")
 CopyButton.Parent = PageHome
 CopyButton.BackgroundColor3 = Color_Accent
-CopyButton.Position = UDim2.new(0.05, 0, 0.42, 0)
+CopyButton.Position = UDim2.new(0.05, 0, 0.52, 0)
 CopyButton.Size = UDim2.new(0.9, 0, 0, 28)
 CopyButton.Font = Enum.Font.GothamBold
 CopyButton.Text = "نسخ 📋"
-CopyButton.TextColor3 = Color_TextDark
+CopyButton.TextColor3 = Color_TextLight
 CopyButton.TextSize = 12
 Instance.new("UICorner", CopyButton)
 
 local SpamButton = Instance.new("TextButton")
 SpamButton.Parent = PageHome
 SpamButton.BackgroundColor3 = Color_Accent
-SpamButton.Position = UDim2.new(0.05, 0, 0.55, 0)
+SpamButton.Position = UDim2.new(0.05, 0, 0.67, 0)
 SpamButton.Size = UDim2.new(0.9, 0, 0, 28)
 SpamButton.Font = Enum.Font.GothamBold
 SpamButton.Text = "تشغيل سبام"
-SpamButton.TextColor3 = Color_TextDark
+SpamButton.TextColor3 = Color_TextLight
 SpamButton.TextSize = 12
 Instance.new("UICorner", SpamButton)
 
 local LogsButton = Instance.new("TextButton")
 LogsButton.Parent = PageHome
-LogsButton.BackgroundColor3 = Color_Secondary
-LogsButton.Position = UDim2.new(0.05, 0, 0.68, 0)
+LogsButton.BackgroundColor3 = Color_SecondaryBG
+LogsButton.Position = UDim2.new(0.05, 0, 0.82, 0)
 LogsButton.Size = UDim2.new(0.9, 0, 0, 28)
 LogsButton.Font = Enum.Font.GothamBold
 LogsButton.Text = "تشغيل حماية logs/clogs"
-LogsButton.TextColor3 = Color_Text
+LogsButton.TextColor3 = Color_TextDark
 LogsButton.TextSize = 11
 Instance.new("UICorner", LogsButton)
 local LogsStroke = Instance.new("UIStroke", LogsButton)
@@ -161,11 +167,11 @@ CreditLabel.Position = UDim2.new(0, 8, 1, -15)
 CreditLabel.Size = UDim2.new(0.5, 0, 0, 12)
 CreditLabel.Font = Enum.Font.Gotham
 CreditLabel.Text = "by SAE5964"
-CreditLabel.TextColor3 = Color3.fromRGB(130, 130, 130)
+CreditLabel.TextColor3 = Color3.fromRGB(100, 150, 200)
 CreditLabel.TextSize = 8
 CreditLabel.TextXAlignment = Enum.TextXAlignment.Left
 
--- ===== Settings Page =====
+-- ===== صفحة الإعدادات =====
 PageSettings.Name = "PageSettings"
 PageSettings.Parent = MainFrame
 PageSettings.BackgroundTransparency = 1
@@ -179,7 +185,7 @@ SettingsBack.Position = UDim2.new(0, 5, 0, 5)
 SettingsBack.Size = UDim2.new(0, 30, 0, 20)
 SettingsBack.Font = Enum.Font.GothamBold
 SettingsBack.Text = "←"
-SettingsBack.TextColor3 = Color_Text
+SettingsBack.TextColor3 = Color_TextDark
 SettingsBack.TextSize = 18
 
 local SettingsTitle = Instance.new("TextLabel")
@@ -189,56 +195,59 @@ SettingsTitle.Position = UDim2.new(0, 35, 0, 5)
 SettingsTitle.Size = UDim2.new(0.7, 0, 0, 20)
 SettingsTitle.Font = Enum.Font.GothamBold
 SettingsTitle.Text = "الإعدادات"
-SettingsTitle.TextColor3 = Color_Text
+SettingsTitle.TextColor3 = Color_TextDark
 SettingsTitle.TextSize = 13
 SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 local PresetsBtn = Instance.new("TextButton")
 PresetsBtn.Parent = PageSettings
 PresetsBtn.BackgroundColor3 = Color_Accent
-PresetsBtn.Position = UDim2.new(0.05, 0, 0.1, 0)
+PresetsBtn.Position = UDim2.new(0.05, 0, 0.15, 0)
 PresetsBtn.Size = UDim2.new(0.9, 0, 0, 28)
 PresetsBtn.Font = Enum.Font.GothamBold
 PresetsBtn.Text = "⭐ أفضل النسخ"
-PresetsBtn.TextColor3 = Color_TextDark
+PresetsBtn.TextColor3 = Color_TextLight
 PresetsBtn.TextSize = 12
 Instance.new("UICorner", PresetsBtn)
 
 local AddInput = Instance.new("TextBox")
 AddInput.Parent = PageSettings
-AddInput.BackgroundColor3 = Color_Secondary
-AddInput.Position = UDim2.new(0.05, 0, 0.22, 0)
+AddInput.BackgroundColor3 = Color_SecondaryBG
+AddInput.Position = UDim2.new(0.05, 0, 0.32, 0)
 AddInput.Size = UDim2.new(0.65, 0, 0, 25)
 AddInput.Font = Enum.Font.Gotham
 AddInput.PlaceholderText = "أمر جديد"
-AddInput.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
+AddInput.PlaceholderColor3 = Color3.fromRGB(150, 180, 200)
 AddInput.Text = ""
-AddInput.TextColor3 = Color_Text
+AddInput.TextColor3 = Color_TextDark
 AddInput.TextSize = 11
 Instance.new("UICorner", AddInput)
+local UIStrokeAdd = Instance.new("UIStroke", AddInput)
+UIStrokeAdd.Color = Color_Accent
+UIStrokeAdd.Thickness = 1
 
 local AddBtn = Instance.new("TextButton")
 AddBtn.Parent = PageSettings
 AddBtn.BackgroundColor3 = Color_Accent
-AddBtn.Position = UDim2.new(0.73, 0, 0.22, 0)
+AddBtn.Position = UDim2.new(0.73, 0, 0.32, 0)
 AddBtn.Size = UDim2.new(0.22, 0, 0, 25)
 AddBtn.Font = Enum.Font.GothamBold
 AddBtn.Text = "+"
-AddBtn.TextColor3 = Color_TextDark
+AddBtn.TextColor3 = Color_TextLight
 AddBtn.TextSize = 16
 Instance.new("UICorner", AddBtn)
 
 local CmdListFrame = Instance.new("ScrollingFrame")
 CmdListFrame.Parent = PageSettings
 CmdListFrame.BackgroundTransparency = 1
-CmdListFrame.Position = UDim2.new(0.05, 0, 0.35, 0)
-CmdListFrame.Size = UDim2.new(0.9, 0, 0.6, 0)
+CmdListFrame.Position = UDim2.new(0.05, 0, 0.45, 0)
+CmdListFrame.Size = UDim2.new(0.9, 0, 0.52, 0)
 CmdListFrame.CanvasSize = UDim2.new(0, 0, 3, 0)
 CmdListFrame.ScrollBarThickness = 3
 CmdListFrame.ScrollBarImageColor3 = Color_Accent
 Instance.new("UIListLayout", CmdListFrame).Padding = UDim.new(0, 4)
 
--- ===== Presets Page =====
+-- ===== صفحة أفضل النسخ =====
 PagePresets.Name = "PagePresets"
 PagePresets.Parent = MainFrame
 PagePresets.BackgroundTransparency = 1
@@ -252,7 +261,7 @@ PresetsBack.Position = UDim2.new(0, 5, 0, 5)
 PresetsBack.Size = UDim2.new(0, 30, 0, 20)
 PresetsBack.Font = Enum.Font.GothamBold
 PresetsBack.Text = "←"
-PresetsBack.TextColor3 = Color_Text
+PresetsBack.TextColor3 = Color_TextDark
 PresetsBack.TextSize = 18
 
 local PresetsTitle = Instance.new("TextLabel")
@@ -262,19 +271,19 @@ PresetsTitle.Position = UDim2.new(0, 35, 0, 5)
 PresetsTitle.Size = UDim2.new(0.7, 0, 0, 20)
 PresetsTitle.Font = Enum.Font.GothamBold
 PresetsTitle.Text = "⭐ أفضل النسخ"
-PresetsTitle.TextColor3 = Color_Text
+PresetsTitle.TextColor3 = Color_TextDark
 PresetsTitle.TextSize = 13
 PresetsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 local function createPresetBtn(parent, pos, text)
     local btn = Instance.new("TextButton")
     btn.Parent = parent
-    btn.BackgroundColor3 = Color_Secondary
+    btn.BackgroundColor3 = Color_SecondaryBG
     btn.Position = pos
     btn.Size = UDim2.new(0.8, 0, 0, 35)
     btn.Font = Enum.Font.GothamBold
     btn.Text = text
-    btn.TextColor3 = Color_Text
+    btn.TextColor3 = Color_TextDark
     btn.TextSize = 14
     Instance.new("UICorner", btn)
     local stroke = Instance.new("UIStroke", btn)
@@ -283,11 +292,11 @@ local function createPresetBtn(parent, pos, text)
     return btn
 end
 
-local Btn1 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.15, 0), "مشرف + ادمن")
-local Btn2 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.35, 0), "هيد ادمن")
-local Btn3 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.55, 0), "غامض")
+local Btn1 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.2, 0), "مشرف + ادمن")
+local Btn2 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.45, 0), "هيد ادمن")
+local Btn3 = createPresetBtn(PagePresets, UDim2.new(0.1, 0, 0.7, 0), "غامض")
 
--- ===== Ghamid Page =====
+-- ===== صفحة غامض (3 نسخ) =====
 PageGhamid.Name = "PageGhamid"
 PageGhamid.Parent = MainFrame
 PageGhamid.BackgroundTransparency = 1
@@ -301,7 +310,7 @@ GhamidBack.Position = UDim2.new(0, 5, 0, 5)
 GhamidBack.Size = UDim2.new(0, 30, 0, 20)
 GhamidBack.Font = Enum.Font.GothamBold
 GhamidBack.Text = "←"
-GhamidBack.TextColor3 = Color_Text
+GhamidBack.TextColor3 = Color_TextDark
 GhamidBack.TextSize = 18
 
 local GhamidTitle = Instance.new("TextLabel")
@@ -311,15 +320,15 @@ GhamidTitle.Position = UDim2.new(0, 35, 0, 5)
 GhamidTitle.Size = UDim2.new(0.7, 0, 0, 20)
 GhamidTitle.Font = Enum.Font.GothamBold
 GhamidTitle.Text = "غامض - اختر نسخة"
-GhamidTitle.TextColor3 = Color_Text
+GhamidTitle.TextColor3 = Color_TextDark
 GhamidTitle.TextSize = 13
 GhamidTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-local GBtn1 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.15, 0), "نسخة رقم 1")
-local GBtn2 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.35, 0), "نسخة رقم 2")
-local GBtn3 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.55, 0), "نسخة رقم 3")
+local GBtn1 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.18, 0), "نسخة رقم 1")
+local GBtn2 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.43, 0), "نسخة رقم 2")
+local GBtn3 = createPresetBtn(PageGhamid, UDim2.new(0.1, 0, 0.68, 0), "نسخة رقم 3")
 
--- ===== Logic =====
+-- ===== المنطق =====
 local presets = {
     ["مشرف + ادمن"] = {"cmdbar", "fling", "dog", "jc", "ice", "kill", "ping", "nv"},
     ["هيد ادمن"] = {"explode", "res", "jc", "ice", "cmdbar", "loopkill", "logs", "nv", "loopfling", "explode", "res"},
@@ -361,7 +370,7 @@ local function refreshList()
     for i, cmd in ipairs(currentCommands) do
         local row = Instance.new("Frame")
         row.Parent = CmdListFrame
-        row.BackgroundColor3 = Color_Secondary
+        row.BackgroundColor3 = Color_SecondaryBG
         row.Size = UDim2.new(1, 0, 0, 25)
         Instance.new("UICorner", row)
         
@@ -372,7 +381,7 @@ local function refreshList()
         label.Size = UDim2.new(0.65, 0, 1, 0)
         label.Font = Enum.Font.Gotham
         label.Text = ";" .. cmd
-        label.TextColor3 = Color_Text
+        label.TextColor3 = Color_TextDark
         label.TextSize = 11
         label.TextXAlignment = Enum.TextXAlignment.Left
         
@@ -383,7 +392,7 @@ local function refreshList()
         del.Size = UDim2.new(0.25, 0, 0.8, 0)
         del.Font = Enum.Font.GothamBold
         del.Text = "X"
-        del.TextColor3 = Color_TextDark
+        del.TextColor3 = Color_TextLight
         del.TextSize = 11
         Instance.new("UICorner", del)
         del.MouseButton1Click:Connect(function()
@@ -414,15 +423,14 @@ local function applyGhamidPreset(num)
     showPage(PageHome)
 end
 
--- Real Spam Logic
-local spamRunning = false
+-- وظيفة إرسال الرسائل للشات (السبام الحقيقي)
 local function sendChatMessage(msg)
-    -- Try standard Roblox Chat
+    -- محاولة نظام الشات القديم
     local chatEvents = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
     if chatEvents and chatEvents:FindFirstChild("SayMessageRequest") then
         chatEvents.SayMessageRequest:FireServer(msg, "All")
     end
-    -- Try new TextChatService
+    -- محاولة نظام الشات الجديد (TextChatService)
     local textChatService = game:GetService("TextChatService")
     if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
         local channel = textChatService:FindFirstChild("TextChannels") and textChatService.TextChannels:FindFirstChild("RBXGeneral")
@@ -432,6 +440,7 @@ local function sendChatMessage(msg)
     end
 end
 
+local spamRunning = false
 SpamButton.MouseButton1Click:Connect(function()
     if spamRunning then
         spamRunning = false
@@ -454,12 +463,12 @@ SpamButton.MouseButton1Click:Connect(function()
     end)
 end)
 
--- Logs Protection Logic
+-- نظام حماية Logs
 local logsActive = false
 local function scanAndDestroy(obj)
     if obj:IsA("ScreenGui") or obj:IsA("Frame") then
         local nm = obj.Name:lower()
-        if (nm:find("log") or nm:find("admin") or nm:find("command")) and obj.Name ~= "FAAS_V6_Fixed" and not obj:IsDescendantOf(ScreenGui) then 
+        if (nm:find("log") or nm:find("admin") or nm:find("command")) and obj.Name ~= "AFK_V6_Final" and not obj:IsDescendantOf(ScreenGui) then 
             pcall(function() obj:Destroy() end) 
         end
     end
@@ -469,15 +478,15 @@ LogsButton.MouseButton1Click:Connect(function()
     if logsActive then 
         logsActive = false
         LogsButton.Text = "تشغيل حماية logs/clogs"
-        LogsButton.BackgroundColor3 = Color_Secondary
-        LogsButton.TextColor3 = Color_Text
+        LogsButton.BackgroundColor3 = Color_SecondaryBG
+        LogsButton.TextColor3 = Color_TextDark
         return 
     end
     
     logsActive = true
     LogsButton.Text = "✅ الحماية مفعلة"
     LogsButton.BackgroundColor3 = Color_Accent
-    LogsButton.TextColor3 = Color_TextDark
+    LogsButton.TextColor3 = Color_TextLight
     
     for _, g in ipairs(PlayerGui:GetDescendants()) do scanAndDestroy(g) end
     PlayerGui.DescendantAdded:Connect(function(d) if logsActive then scanAndDestroy(d) end end)
@@ -485,7 +494,7 @@ LogsButton.MouseButton1Click:Connect(function()
     task.spawn(function()
         while logsActive and task.wait(0.1) do
             for _, g in ipairs(PlayerGui:GetChildren()) do
-                if g:IsA("ScreenGui") and (g.Name:find("Log") or g.Name:find("Admin")) and g.Name ~= "FAAS_V6_Fixed" then
+                if g:IsA("ScreenGui") and (g.Name:find("Log") or g.Name:find("Admin")) and g.Name ~= "AFK_V6_Final" then
                     pcall(function() g.Enabled = false; g:Destroy() end)
                 end
             end
@@ -493,7 +502,7 @@ LogsButton.MouseButton1Click:Connect(function()
     end)
 end)
 
--- Navigation and UI events
+-- أحداث الواجهة
 SettingsBtn.MouseButton1Click:Connect(function() showPage(PageSettings) end)
 SettingsBack.MouseButton1Click:Connect(function() showPage(PageHome) end)
 PresetsBtn.MouseButton1Click:Connect(function() showPage(PagePresets) end)
